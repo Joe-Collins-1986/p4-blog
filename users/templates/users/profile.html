@@ -3,7 +3,11 @@
 {% block content %}
         <div class="content-section">
             <div class="media">
-                <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+                {% if 'default' in user.profile.image.url %}
+                    <img class="rounded-circle account-img" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png">
+                {% else %}
+                    <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+                {% endif %}
                 <div class="media-body">
                     <h2 class="account-heading">{{ user.username }}</h2>
                     <p class="text-secondary">{{ user.email }}</p>
