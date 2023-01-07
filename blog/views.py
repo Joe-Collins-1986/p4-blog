@@ -25,6 +25,7 @@ class PostListView(ListView):
     template_name = 'blog/home.html'  # This takes the place of the defaul which would be: <app>/<model>_<viewtype>.html - therefore(blog/post_list.html)
     context_object_name = 'posts' # would pass object if not changed to post. Then would need to reference object not post in the template (see PostDetailView class for example)
     ordering = ["-date_posted"]
+    paginate_by = 5
 
 
 class PostDetailView(DetailView): # Because i have not specified a template name this will default to: <app>/<model>_<viewtype>.html - therefore(blog/post_detail.html)
