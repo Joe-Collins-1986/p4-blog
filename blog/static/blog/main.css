@@ -88,11 +88,20 @@ body {
   }
 
 
-  .media {
+  .media-body {
     display: flex;
   }
 
   .form-group {
     margin-top: 10px;
     margin-bottom: 5px;
+  }
+
+  .post-detail {
+    position: relative;
+    bottom: 2px;
+  }
+
+  .full-width {
+    width: 80%;
   }
