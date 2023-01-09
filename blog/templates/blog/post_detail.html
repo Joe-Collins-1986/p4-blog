@@ -3,11 +3,11 @@
     <article class="media content-section">
         <div class="media-body">
             <div>
-                <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
+                <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
             </div>
             <div class="full-width">
                 <div class="article-metadata">
-                    <a class="mr-2 align-bottom post-detail" href="#">{{ object.author }}</a>
+                    <a class="mr-2 align-bottom post-detail" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
                     <small class="text-muted align-bottom post-detail">{{ object.date_posted|date:"dS F Y (P)" }}</small>
                 </div>
                 <h2 class="article-title">{{ object.title }}</h2>

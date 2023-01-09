@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     UserPassesTestMixin
 )
+from django.contrib.auth.models import User
 from django.views.generic import (
     ListView,
     DetailView,
@@ -26,6 +27,17 @@ class PostListView(ListView):
     context_object_name = 'posts' # would pass object if not changed to post. Then would need to reference object not post in the template (see PostDetailView class for example)
     ordering = ["-date_posted"]
     paginate_by = 5
+
+
+class UserPostListView(ListView):
+    model = Post
+    template_name = 'blog/user_posts.html'  # This takes the place of the defaul which would be: <app>/<model>_<viewtype>.html - therefore(blog/post_list.html)
+    context_object_name = 'posts' # would pass object if not changed to post. Then would need to reference object not post in the template (see PostDetailView class for example)
+    paginate_by = 5
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
 
 
 class PostDetailView(DetailView): # Because i have not specified a template name this will default to: <app>/<model>_<viewtype>.html - therefore(blog/post_detail.html)
