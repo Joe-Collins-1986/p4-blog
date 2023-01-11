@@ -1,17 +1,20 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.http import HttpResponseRedirect
 from django.contrib.auth.mixins import (
     LoginRequiredMixin,
     UserPassesTestMixin
 )
 from django.contrib.auth.models import User
 from django.views.generic import (
+    View,
     ListView,
-    DetailView,
+    # DetailView,
     CreateView,
     UpdateView,
-    DeleteView
+    DeleteView,
 )
 from .models import Post
+from .forms import CommentForm
 
 # THIS FUNCTION HAS BEEN REPLACED BY THE BELOW CLASS PostListView
 # def home(request):
@@ -20,6 +23,17 @@ from .models import Post
 #     }
 #     return render(request, 'blog/home.html', context)
 
+class LikeView(View):
+
+    def post(self, request, pk):
+        post = get_object_or_404(Post, id=request.POST.get('post_liked_id'))
+
+        if post.likes.filter(id=request.user.id).exists():
+            post.likes.remove(request.user)
+        else:
+            post.likes.add(request.user)
+        
+        return HttpResponseRedirect(reverse('post-detail', args=[pk]))
 
 class PostListView(ListView):
     model = Post
@@ -40,8 +54,57 @@ class UserPostListView(ListView):
         return Post.objects.filter(author=user).order_by('-date_posted')
 
 
-class PostDetailView(DetailView): # Because i have not specified a template name this will default to: <app>/<model>_<viewtype>.html - therefore(blog/post_detail.html)
-    model = Post
+class PostDetailView(View): # Because i have not specified a template name this will default to: <app>/<model>_<viewtype>.html - therefore(blog/post_detail.html)
+    def get(self, request, pk, *args, **kwargs):
+        queryset = Post.objects.all()
+        post = get_object_or_404(queryset, pk=pk)
+        comments = post.comments.all().order_by("-created_on")
+        liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+        return render(
+            request,
+            "blog/post_detail.html",
+            {
+                "post": post,
+                "comments": comments,
+                "commented": False,
+                "liked": liked,
+                "comment_form": CommentForm()
+            },
+        )
+    
+    def post(self, request, pk, *args, **kwargs):
+
+        queryset = Post.objects.all()
+        post = get_object_or_404(queryset, pk=pk)
+        comments = post.comments.all().order_by("-created_on")
+        liked = False
+        if post.likes.filter(id=self.request.user.id).exists():
+            liked = True
+
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            comment_form.instance.name = request.user.username
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+        else:
+            comment_form = CommentForm()
+
+        return render(
+            request,
+            "blog/post_detail.html",
+            {
+                "post": post,
+                "comments": comments,
+                "commented": True,
+                "comment_form": comment_form,
+                "liked": liked
+            },
+        )
+
 
 
 class PostCreateView(LoginRequiredMixin, CreateView): # create and update will default to <app>/<model>_<form>.html

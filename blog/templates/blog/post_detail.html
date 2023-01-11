@@ -1,22 +1,60 @@
 {% extends "blog/base.html" %}
 {% block content %}
+{% load crispy_forms_tags %}
+
+
     <article class="media content-section">
         <div class="media-body">
             <div>
-                <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+                <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">
             </div>
             <div class="full-width">
                 <div class="article-metadata">
-                    <a class="mr-2 align-bottom post-detail" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+                    <a class="mr-2 align-bottom post-detail" href="{% url 'user-posts' post.author.username %}">{{ object.author }}</a>
                     <small class="text-muted align-bottom post-detail">{{ object.date_posted|date:"dS F Y (P)" }}</small>
                 </div>
-                <h2 class="article-title">{{ object.title }}</h2>
-                <p class="article-content">{{ object.content }}</p>
+                <h2 class="article-title">{{ post.title }}</h2>
+                <p class="article-content">{{ post.content }}</p>
+
+                <div class="content-section">
+                    {% if comments|length == 0 %}
+                        No Comments
+                    {% else %}
+                        {% for comment in comments %}
+                            <div class="content-section">
+                                <h2>{{ comment.title }}</h2>
+                                <p>{{ comment.body }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                <form action="{% url 'like_post' post.pk %}" method="POST">
+                    {% csrf_token %}
+                    {% if user.id != None %}
+                        <button class="btn btn-icon" type="submit" name="post_liked_id" value="{{ post.id }}">
+                            <i class="fa-solid fa-heart fa-lg text-danger"></i> {{ post.likes.count }}
+                        </button> 
+                    {% else %}
+                        <i class="fa-solid fa-heart fa-lg text-danger"></i> {{ post.likes.count }}
+                    {% endif %}
+                </form>
                 {% if object.author == user %}
-                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Update</a>
+                        <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
                 {% endif %}
             </div>
         </div>
     </article>
+
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Add Comment</legend>
+                {{ comment_form | crispy }}
+            </fieldset>
+            <button type="submit" class="btn btn-outline-secondary">Submit</button>
+        </form>
+    </div>
 {% endblock content %}
