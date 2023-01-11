@@ -13,7 +13,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from .models import Post
+from .models import Post, Comment
 from .forms import CommentForm
 
 # THIS FUNCTION HAS BEEN REPLACED BY THE BELOW CLASS PostListView
@@ -138,6 +138,33 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView): # Bec
     def test_func(self):
         post = self.get_object()
         if self.request.user == post.author:
+            return True
+        return False
+
+
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView): # create and update will default to <app>/<model>_<form>.html - same template as create
+    model = Comment
+    fields = ['title', 'body']
+
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user.username == comment.name:
+            return True
+        return False
+
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView): # Because i have not specified a template name this will default to a form for: <app>/<model>_<confirm_delete>.html - therefore(blog/post_confirm_delete.html)
+    model = Comment
+    success_url = '/'
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user.username == comment.name:
             return True
         return False
 
