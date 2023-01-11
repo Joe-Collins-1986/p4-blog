@@ -34,3 +34,15 @@ class Comment(models.Model):
 
     def get_absolute_url(self):
         return reverse('post-detail', args=[str(self.post.id)])
+
+
+class Box(models.Model):
+    name = models.CharField(max_length=80)
+    visited = models.BooleanField(default=False)
+    color = models.CharField(max_length=80)
+
+    def __str__(self):
+        return f"Box Name: {self.name}"
+    
+    def get_absolute_url(self):
+        return reverse('blog-about')

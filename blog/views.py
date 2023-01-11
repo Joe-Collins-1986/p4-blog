@@ -13,7 +13,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from .models import Post, Comment
+from .models import Post, Comment, Box
 from .forms import CommentForm
 
 # THIS FUNCTION HAS BEEN REPLACED BY THE BELOW CLASS PostListView
@@ -169,5 +169,46 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView): # 
         return False
 
 
-def about(request):
-    return render(request, 'blog/about.html', {'title': 'About'})
+# ABOUT - PRACITICE FOR MAIN PROJECT
+
+
+class About(View):
+    model = Box
+
+    def get(self, request):
+        boxes = Box.objects.all()
+        box1 = get_object_or_404(boxes, name="Box1")
+        box2 = get_object_or_404(boxes, name="Box2")
+        box3 = get_object_or_404(boxes, name="Box3")
+        box4 = get_object_or_404(boxes, name="Box4")
+
+        return render(
+                request,
+                "blog/about.html",
+                {
+                    "box_1": box1,
+                    "box_2": box2,
+                    "box_3": box3,
+                    "box_4": box4,
+                },
+            )
+
+
+
+# class AboutUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView): 
+class AboutUpdate(UpdateView): 
+    model = Box
+    template_name = 'blog/about_form.html'
+    fields = ['visited']
+
+    # def form_valid(self, form):
+    #     form.instance.author = self.request.user
+    #     return super().form_valid(form)
+    
+    # def test_func(self):
+    #     box = self.get_object()
+    #     if self.request.user == box.name:
+    #         return True
+    #     return False
+
+    # return HttpResponseRedirect(reverse('post-detail'))

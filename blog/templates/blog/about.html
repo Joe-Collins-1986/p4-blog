@@ -1,4 +1,20 @@
 {% extends "blog/base.html" %}
 {% block content %}
     <h1>About Page!</h1>
+
+    {{ box_1.color }}
+    {{ box_1.name }}
+    {{ box_1.pk }}
+
+
+    <div class="d-flex mb-3">
+        <div class="card text-white bg-{{ box_1.color }}" style="width: 150px; height: 150px;">Box 1</div>
+        <div class="card text-white bg-{{ box_2.color }} ms-3" style="width: 150px; height: 150px;">Box 2</div>
+    </div>
+    <div class="d-flex ">
+        <div class="card text-white bg-{{ box_3.color }}" style="width: 150px; height: 150px;">Box 3</div>
+        <div class="card text-white bg-{{ box_4.color }} ms-3" style="width: 150px; height: 150px;">Box 4</div>
+    </div>
+
+
 {% endblock content %}
