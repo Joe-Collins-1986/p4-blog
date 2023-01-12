@@ -169,6 +169,8 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView): # 
         return False
 
 
+
+
 # ABOUT - PRACITICE FOR MAIN PROJECT
 
 
@@ -199,7 +201,21 @@ class About(View):
 class AboutUpdate(UpdateView): 
     model = Box
     template_name = 'blog/about_form.html'
-    fields = ['visited']
+    fields = ['visited',]
+
+    def form_valid(self, form):
+        if form.instance.visited:
+            form.instance.color = "info"
+        else:
+            form.instance.color = "danger"
+        form.instance.save()
+
+        return HttpResponseRedirect(reverse('blog-about'))
+
+
+    #     form.instance.author = self.request.user
+    #     return super().form_valid(form)
+
 
     # def form_valid(self, form):
     #     form.instance.author = self.request.user
@@ -210,5 +226,3 @@ class AboutUpdate(UpdateView):
     #     if self.request.user == box.name:
     #         return True
     #     return False
-
-    # return HttpResponseRedirect(reverse('post-detail'))

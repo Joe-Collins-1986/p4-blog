@@ -16,5 +16,9 @@
         <div class="card text-white bg-{{ box_4.color }} ms-3" style="width: 150px; height: 150px;">Box 4</div>
     </div>
 
+    <br><br>
+    <h2><a class="article-title" href="{% url 'about-update' box_1.pk %}">Update {{ box_1.name }}</a></h2>
+
+
 
 {% endblock content %}
