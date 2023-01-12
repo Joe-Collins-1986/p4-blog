@@ -35,8 +35,9 @@ class Comment(models.Model):
     def get_absolute_url(self):
         return reverse('post-detail', args=[str(self.post.id)])
 
-
 class Box(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             related_name="boxes")
     name = models.CharField(max_length=80)
     visited = models.BooleanField(default=False)
     color = models.CharField(max_length=80)

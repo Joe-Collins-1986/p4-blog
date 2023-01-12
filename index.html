@@ -1,92 +1,13 @@
-{% extends "blog/base.html" %}
-{% block content %}
-    <h1>About Page!</h1>
-
-    {{ box_1 }}<br>
-    {{ box_1.color }}<br>
-    {{ box_1.name }}<br>
-    {{ box_1.pk }}<br>
-    {{ user }}<br>
-    {{ box_1.user.username}}
-
-    <br><br>
-
-    {% if user.username == box_1.user.username %}
-
-    <h1>{{ user.username}} - Has boxes set up</h1>
-
-        <div class="d-flex mb-3">
-            <div class="d-flex justify-content-center text-center card bg-{{ box_1.color }}" style="width: 150px; height: 150px;">
-                <h2><a class="article-title text-white" href="{% url 'about-update' box_1.pk %}">{{ box_1.name }}</a></h2>
-            </div>
-            <div class="d-flex justify-content-center text-center card bg-{{ box_2.color }} ms-3" style="width: 150px; height: 150px;">
-                <h2><a class="article-title text-white" href="{% url 'about-update' box_2.pk %}">{{ box_2.name }}</a></h2>
-            </div>
-        </div>
-        <div class="d-flex mb-10">
-            <div class="d-flex justify-content-center text-center card bg-{{ box_3.color }}" style="width: 150px; height: 150px;">
-                <h2><a class="article-title text-white" href="{% url 'about-update' box_3.pk %}">{{ box_3.name }}</a></h2>
-            </div>
-            <div class="d-flex justify-content-center text-center card bg-{{ box_4.color }} ms-3" style="width: 150px; height: 150px;">
-                <h2><a class="article-title text-white" href="{% url 'about-update' box_4.pk %}">{{ box_4.name }}</a></h2>
-            </div>
-        </div>
-
-    {% else %}
-
-        <h1>No boxes set up</h1>
-        <div class="d-flex mb-3">
-            <div class="d-flex justify-content-center text-center card bg-{{ box_1_color }}" style="width: 150px; height: 150px;">
-                <h2>a</h2>
-            </div>
-            <div class="d-flex justify-content-center text-center card bg-{{ box_2_color }} ms-3" style="width: 150px; height: 150px;">
-                <h2>a</h2>
-            </div>
-        </div>
-        <div class="d-flex mb-10">
-            <div class="d-flex justify-content-center text-center card bg-{{ box_3_color }}" style="width: 150px; height: 150px;">
-                <h2>a</h2>
-            </div>
-            <div class="d-flex justify-content-center text-center card bg-{{ box_4_color }} ms-3" style="width: 150px; height: 150px;">
-                <h2>a</h2>
-            </div>
-        </div>
-
-
-    {% endif %}
-    <br><br><br><br><br><br>
-
-    <h1>UK - Click to navigate - not yet linked up</h1>
-
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      baseprofile="tiny"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      version="1.2"
-      viewbox="0 0 2000 857"
-    >
-        <a class="article-title text-white" href="{% url 'about-update' box_1.pk %}">
-            <path
-                class="United Kingdom experiment"
-                d="M 956.7 158.2 953.2 157 950.2 157.1 951.4 153.8 950.5 150.6 954.5 150.3 959.4 154.1 956.7 158.2 Z"
-            ></path>
-        </a>
-        <a class="article-title text-white" href="{% url 'about-update' box_1.pk %}">
-            <path
-                class="United Kingdom experiment"
-                d="M 972.6 129.5 967.5 136 972.2 135.2 977.3 135.2 976 140.1 971.7 145.5 976.6 145.8 976.9 146.5 981.1 153.6 984.3 154.6 987.2 161.6 988.6 164 994.5 165.1 993.9 169.1 991.5 170.9 993.4 174.1 989 177.3 982.5 177.2 974.1 179 971.9 177.7 968.6 180.6 964.1 179.9 960.5 182.3 958 181.1 965.3 174.6 969.7 173.2 962.1 172.2 960.8 169.7 965.9 167.8 963.4 164.5 964.4 160.5 971.5 161.1 972.3 157.5 969.2 153.8 969.1 153.7 963.4 152.6 962.3 151 964.1 148.3 962.6 146.6 960 149.5 959.9 143.6 957.7 140.6 959.6 134.4 963.4 129.6 967 130 972.6 129.5 Z"
-            ></path>
-        </a>
-      <circle cx="997.9" cy="189.1" id="0"></circle>
-      <circle cx="673.5" cy="724.1" id="1"></circle>
-      <circle cx="1798.2" cy="719.3" id="2"></circle>
-    </svg>
-
-    <br><br><br><br><br><br>
-
-    <h1>World Map</h1>
-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
     <svg
       xmlns="http://www.w3.org/2000/svg"
       baseprofile="tiny"
@@ -2092,63 +2013,11 @@
         id="RE"
         name="Reunion"
       ></path>
-      <path
-        class="Guadeloupe"
-        d="M 643 399.9 642.7 399.9 642.5 399.5 642.6 399.3 642.9 399 643.2 399.2 643.3 399.5 643.3 399.7 643 399.9 Z"
-      ></path>
-      <path
-        class="Guadeloupe"
-        d="M 641.2 397.3 641.5 397.3 641.5 397.5 641.5 397.6 641.3 397.7 641.3 398.5 641.3 398.9 641.1 399.1 640.5 399.4 640.5 399.2 640.3 399 640.2 398.5 640.2 398 640.1 397.5 640.1 397.2 640.3 396.9 640.6 396.8 641.1 397.1 641.2 397.3 Z"
-      ></path>
-      <path
-        class="Guadeloupe"
-        d="M 642.6 396.9 643 397 643.5 397.4 642.2 397.7 641.9 397.8 641.5 397.5 641.6 396.9 641.8 396.8 641.7 396.2 641.8 396 642.1 395.8 642.4 396.2 642.4 396.6 642.6 396.9 Z"
-      ></path>
-      <path
-        class="Fiji"
-        d="M 1989.1 624.9 1988.8 625 1988.9 624.6 1989.1 624.9 Z"
-      ></path>
-      <path
-        class="Fiji"
-        d="M 1981.6 623.3 1981.8 623.5 1982.1 623.6 1982.1 623.9 1981.6 624.1 1981.1 623.8 1980.6 624.1 1980.3 624.1 1980.1 624.4 1980.2 624.7 1979.8 624.6 1979.7 624.8 1979.3 624.7 1979.2 624.8 1978.8 624.6 1979.1 624.5 1979.3 624.4 1979.5 624.2 1979.9 624.3 1980.2 624 1980.4 623.7 1980.9 623.6 1981.4 623.3 1981.6 623.3 Z"
-      ></path>
-      <path
-        class="Fiji"
-        d="M 1982.5 623.2 1982.3 623.3 1982.1 623.2 1982.3 623 1982.5 623.2 Z"
-      ></path>
-      <path
-        class="Fiji"
-        d="M 1988.4 617.1 1988.5 617.6 1988.3 618.2 1988.2 618 1988.1 617.6 1987.9 617.6 1988 617.1 1988.2 617 1988.4 617.1 Z"
-      ></path>
-      <path
-        class="Fiji"
-        d="M 1985.8 615.7 1985.7 615.7 1985.6 615.3 1985.8 615.1 1986.2 615 1986.2 615.4 1986 615.6 1985.8 615.7 Z"
-      ></path>
-      <path
-        class="Fiji"
-        d="M 1983.6 613.2 1983.5 613.6 1983.8 613.8 1983.9 614.1 1984.2 614.5 1984.5 614.6 1984.6 614.9 1984.8 614.9 1984.9 615.3 1984.6 615.8 1984.7 616 1984.8 616.5 1984.5 616.7 1984.5 617.2 1984.7 617.2 1984.8 617.7 1984.5 618 1983.9 618.2 1983.8 618 1983.5 618.1 1983.4 618.3 1983.1 618 1982.3 618.3 1981.5 619 1981.2 618.9 1980.8 619.1 1980.5 619 1979.9 619.1 1979.6 618.9 1978.7 618.6 1978.4 618.5 1977.8 618.4 1977.6 618.3 1977.1 618.1 1976.9 617.1 1977.2 616.4 1977.5 616.4 1977.8 616.3 1977.9 615.8 1978.2 615.7 1978.3 615.3 1978.1 615.1 1978.7 614.7 1979.1 614.2 1979.2 614.3 1979.8 613.8 1980 613.8 1980.9 613.4 1981.5 613.6 1981.8 613.5 1982.3 613.3 1982.9 613.2 1983.2 612.9 1983.6 613.2 Z"
-      ></path>
-      <path
-        class="Fiji"
-        d="M 1989.9 613.4 1989.7 613.5 1989.9 612.6 1990.3 612.6 1990.2 613 1989.9 613.4 Z"
-      ></path>
-      <path
-        class="Fiji"
-        d="M 1978.5 611.4 1978.3 611.7 1977.8 612 1977.8 611.7 1978.2 611.3 1978.5 611.4 Z"
-      ></path>
-      <path
-        class="Fiji"
-        d="M 1993.4 611 1993.2 610.8 1993.3 610.6 1993.8 610.1 1994.1 609.6 1993.8 610.7 1993.4 611 Z"
-      ></path>
-      <path
-        class="Fiji"
-        d="M 1994.4 606 1994 606.4 1993.2 607.5 1992.9 607.6 1992.2 608 1992 608.6 1991.6 608.8 1991.4 609.1 1991.3 609.3 1991.6 609.4 1992.2 609.1 1992.3 609 1992.6 608.7 1992.8 608.4 1993.4 608.1 1993.7 607.8 1994.3 607.5 1994.3 607.8 1993.8 608.5 1993.6 608.6 1993.7 609.2 1993.4 609.5 1993.1 609.2 1992.7 609.2 1992.2 609.3 1991.8 609.6 1991.1 609.7 1990.1 609.7 1990.6 609.2 1990.2 609 1989.6 609.2 1989.2 609.4 1989.2 609.6 1988.9 609.7 1988.7 609.8 1988.6 610.2 1988.4 610.5 1988.1 610.4 1988.1 610.2 1987.7 610.1 1987.3 610.3 1987.1 610.8 1986.8 611 1986.5 611 1986.5 610.7 1986.5 610.3 1986.3 609.9 1986.4 609.7 1986.3 609.6 1985.7 609.8 1985.7 609.4 1986.1 609.1 1986.2 609.1 1986.1 608.6 1986.4 608.5 1986.9 608.8 1987.5 608.4 1987.7 608.4 1988 608.1 1988.2 608.1 1988.5 607.8 1988.5 607.6 1989.3 607.5 1990.2 607.2 1990.5 607.1 1990.9 607.2 1991.4 607 1991.6 606.6 1991.8 606.6 1992 606.2 1992.4 606.3 1992.5 606.1 1992.7 606.2 1993.7 605.7 1993.8 606 1994 605.9 1994.2 606 1994.5 605.7 1995 605.5 1995.1 605.6 1994.6 606 1994.4 606 Z"
-      ></path>
+
+
       <circle cx="997.9" cy="189.1" id="0"></circle>
       <circle cx="673.5" cy="724.1" id="1"></circle>
       <circle cx="1798.2" cy="719.3" id="2"></circle>
     </svg>
-
-
-
-{% endblock content %}
+  </body>
+</html>

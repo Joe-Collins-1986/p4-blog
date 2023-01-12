@@ -175,25 +175,79 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView): # 
 
 
 class About(View):
-    model = Box
 
     def get(self, request):
-        boxes = Box.objects.all()
-        box1 = get_object_or_404(boxes, name="Box1")
-        box2 = get_object_or_404(boxes, name="Box2")
-        box3 = get_object_or_404(boxes, name="Box3")
-        box4 = get_object_or_404(boxes, name="Box4")
+        user = User.objects.get(id=request.user.id)
+        boxes = Box.objects.filter(user=request.user.id)
+
+        if boxes.filter(name="Box1").exists():
+            box1 = get_object_or_404(boxes, name="Box1")
+            box1_color = box1.color
+        else:
+            box1 = "temp"
+            box1_color = "danger"
+        
+        if boxes.filter(name="Box2").exists():
+            box2 = get_object_or_404(boxes, name="Box2")
+            box2_color = box2.color
+        else:
+            box2 = "temp"
+            box2_color = "danger"
+
+        if boxes.filter(name="Box3").exists():
+            box3 = get_object_or_404(boxes, name="Box3")
+            box3_color = box3.color
+        else:
+            box3 = "temp"
+            box3_color = "danger"
+
+        if boxes.filter(name="Box4").exists():
+            box4 = get_object_or_404(boxes, name="Box4")
+            box4_color = box4.color
+        else:
+            box4 = "temp"
+            box4_color = "danger"
+
 
         return render(
                 request,
                 "blog/about.html",
                 {
+                    "box_1_color": box1_color,
                     "box_1": box1,
+
+                    "box_2_color": box2_color,
                     "box_2": box2,
+
+                    "box_3_color": box3_color,
                     "box_3": box3,
+
+                    "box_4_color": box4_color,
                     "box_4": box4,
+
+                    "user": user,
+                    "admin1": "admin1"
                 },
             )
+
+
+    # def get(self, request):
+    #     boxes = Box.objects.all()
+    #     box1 = get_object_or_404(boxes, name="Box1")
+    #     box2 = get_object_or_404(boxes, name="Box2")
+    #     box3 = get_object_or_404(boxes, name="Box3")
+    #     box4 = get_object_or_404(boxes, name="Box4")
+
+    #     return render(
+    #             request,
+    #             "blog/about.html",
+    #             {
+    #                 "box_1": box1,
+    #                 "box_2": box2,
+    #                 "box_3": box3,
+    #                 "box_4": box4,
+    #             },
+    #         )
 
 
 
@@ -213,8 +267,9 @@ class AboutUpdate(UpdateView):
         return HttpResponseRedirect(reverse('blog-about'))
 
 
-    #     form.instance.author = self.request.user
-    #     return super().form_valid(form)
+
+
+
 
 
     # def form_valid(self, form):
