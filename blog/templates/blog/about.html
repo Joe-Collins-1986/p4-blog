@@ -8,20 +8,21 @@
 
 
     <div class="d-flex mb-3">
-        <div class="card text-white bg-{{ box_1.color }}" style="width: 150px; height: 150px;">Box 1</div>
-        <div class="card text-white bg-{{ box_2.color }} ms-3" style="width: 150px; height: 150px;">Box 2</div>
+        <div class="d-flex justify-content-center text-center card bg-{{ box_1.color }}" style="width: 150px; height: 150px;">
+            <h2><a class="article-title text-white" href="{% url 'about-update' box_1.pk %}">{{ box_1.name }}</a></h2>
+        </div>
+        <div class="d-flex justify-content-center text-center card bg-{{ box_2.color }} ms-3" style="width: 150px; height: 150px;">
+            <h2><a class="article-title text-white" href="{% url 'about-update' box_2.pk %}">{{ box_2.name }}</a></h2>
+        </div>
     </div>
     <div class="d-flex ">
-        <div class="card text-white bg-{{ box_3.color }}" style="width: 150px; height: 150px;">Box 3</div>
-        <div class="card text-white bg-{{ box_4.color }} ms-3" style="width: 150px; height: 150px;">Box 4</div>
+        <div class="d-flex justify-content-center text-center card bg-{{ box_3.color }}" style="width: 150px; height: 150px;">
+            <h2><a class="article-title text-white" href="{% url 'about-update' box_3.pk %}">{{ box_3.name }}</a></h2>
+        </div>
+        <div class="d-flex justify-content-center text-center card bg-{{ box_4.color }} ms-3" style="width: 150px; height: 150px;">
+            <h2><a class="article-title text-white" href="{% url 'about-update' box_4.pk %}">{{ box_4.name }}</a></h2>
+        </div>
     </div>
-
-    <br><br>
-    <h2><a class="article-title" href="{% url 'about-update' box_1.pk %}">Update {{ box_1.name }}</a></h2>
-    <h2><a class="article-title" href="{% url 'about-update' box_2.pk %}">Update {{ box_2.name }}</a></h2>
-    <h2><a class="article-title" href="{% url 'about-update' box_3.pk %}">Update {{ box_3.name }}</a></h2>
-    <h2><a class="article-title" href="{% url 'about-update' box_4.pk %}">Update {{ box_4.name }}</a></h2>
-
 
 
 {% endblock content %}
