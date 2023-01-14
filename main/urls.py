@@ -29,6 +29,8 @@ urlpatterns = [
         name='password_reset_complete'),
 
     path('', include("blog.urls")),
+
+    path('map/', include("map.urls")),
 ]
 
 

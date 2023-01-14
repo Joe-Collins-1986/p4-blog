@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'blog',
     'users',
     'storages',
+    'map'
 ]
 
 MIDDLEWARE = [
