@@ -6,6 +6,7 @@ from django.urls import reverse
 
 class Country(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(null=True, default=None, unique=True)
     about = models.CharField(max_length=500)
 
     def __str__(self):

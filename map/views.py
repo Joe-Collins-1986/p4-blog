@@ -12,39 +12,67 @@ from django.views.generic import (
 )
 from .models import Country, Visit
 from .forms import VisitForm
-from .assign_country import *
-
-
-# class MapView(ListView):
-#     model = Country
-#     template_name = 'map/home.html'
-#     context_object_name = 'countries'
+# from .assign_country import *
 
 
 class MapView(View):
 
     def get(self, request):
-        # COUNTRY VARIABLES STORED IN ASSIGN_COUNTRY.PY
 
-        if Albania.country_map.filter(user=request.user.id).exists():
-            Albania_status = Albania.country_map.get(user=request.user.id)
-        else:
-            Albania_status = 'not_visited'
+        country_list = ["albania", "belgium", "bulgaria", "bosnia_and_herzegovina", "belarus", "switzerland", "czech_republic",
+        "germany", "denmark", "estonia", "finland", "united_kingdom"]
 
-        if Belgium.country_map.filter(user=request.user.id).exists():
-            Belgium_status = Belgium.country_map.get(user=request.user.id)
-        else:
-            Belgium_status = 'not_visited'
+        # https://plainenglish.io/blog/how-to-dynamically-declare-variables-inside-a-loop-in-python
+        dict = {}
+        for country in country_list:
+            key = country
+            dict[key] = Country.objects.get(slug=country)
 
+            status_dict = {}
+            if dict[key].country_map.filter(user=request.user.id).exists():
+                key = f"{country}_status"
+                status_dict[key] = dict[country].country_map.get(user=request.user.id)
+            else:
+                key = f"{country}_status"
+                status_dict[key] = "not_visited"
+
+            globals().update(status_dict) # https://stackoverflow.com/questions/18090672/convert-dictionary-entries-into-variables
+
+        globals().update(dict)
+            
         
         return render(
                 request,
                 "map/home.html",
                 {
-                    "Albania_status": Albania_status,
-                    "Albania": Albania,
-                    "Belgium_status": Belgium_status,
-                    "Belgium": Belgium,
+                    "albania_status": albania_status,
+                    "albania": albania,
+                    "belgium_status": belgium_status,
+                    "belgium": belgium,
+                    "bulgaria_status": bulgaria_status,
+                    "bulgaria": bulgaria,
+                    "bosnia_and_herzegovina_status": bosnia_and_herzegovina_status,
+                    "bosnia_and_herzegovina": bosnia_and_herzegovina,
+                    "belarus_status": belarus_status,
+                    "belarus": belarus,
+                    "switzerland_status": switzerland_status,
+                    "switzerland": switzerland,
+                    "czech_republic_status": czech_republic_status,
+                    "czech_republic": czech_republic,
+                    "germany_status": germany_status,
+                    "germany": germany,
+                    "denmark_status": denmark_status,
+                    "denmark": denmark,
+                    "estonia_status": estonia_status,
+                    "estonia": estonia,
+                    "finland_status": finland_status,
+                    "finland": finland,
+                    "united_kingdom": united_kingdom_status,
+                    "united_kingdom": united_kingdom,
+
+
+
+
                 },
             )
 
