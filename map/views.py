@@ -8,15 +8,45 @@ from django.contrib.auth.models import User
 from django.views.generic import (
     View,
     ListView,
+    DetailView,
 )
 from .models import Country, Visit
 from .forms import VisitForm
+from .assign_country import *
 
 
-class MapView(ListView):
-    model = Country
-    template_name = 'map/home.html'
-    context_object_name = 'countries'
+# class MapView(ListView):
+#     model = Country
+#     template_name = 'map/home.html'
+#     context_object_name = 'countries'
+
+
+class MapView(View):
+
+    def get(self, request):
+        # COUNTRY VARIABLES STORED IN ASSIGN_COUNTRY.PY
+
+        if Albania.country_map.filter(user=request.user.id).exists():
+            Albania_status = Albania.country_map.get(user=request.user.id)
+        else:
+            Albania_status = 'not_visited'
+
+        if Belgium.country_map.filter(user=request.user.id).exists():
+            Belgium_status = Belgium.country_map.get(user=request.user.id)
+        else:
+            Belgium_status = 'not_visited'
+
+        
+        return render(
+                request,
+                "map/home.html",
+                {
+                    "Albania_status": Albania_status,
+                    "Albania": Albania,
+                    "Belgium_status": Belgium_status,
+                    "Belgium": Belgium,
+                },
+            )
 
 
 class CountryView(View):

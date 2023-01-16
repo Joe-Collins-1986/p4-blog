@@ -17,7 +17,7 @@ class Visit(models.Model):
                              related_name="users_map")
     country = models.ForeignKey(Country, on_delete=models.CASCADE,
                                 related_name="country_map")
-    status = models.CharField(max_length=50, default="Not_Visited")
+    status = models.CharField(max_length=50, default="not_visited")
 
     def __str__(self):
         return self.status
