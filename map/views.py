@@ -20,7 +20,10 @@ class MapView(View):
     def get(self, request):
 
         country_list = ["albania", "belgium", "bulgaria", "bosnia_and_herzegovina", "belarus", "switzerland", "czech_republic",
-        "germany", "denmark", "estonia", "finland", "united_kingdom"]
+                        "germany", "denmark", "estonia", "finland", "united_kingdom", "greece", "croatia", "hungary", "ireland",
+                        "iceland", "italy", "lithuania", "luxembourg", "latvia", "moldova", "montenegro", "norway", "poland", "romania",
+                        "serbia", "slovakia", "slovenia", "sweden", "ukraine", "netherlands", "portugal", "spain", "france",
+                        "malta", "canary_islands"]
 
         # https://plainenglish.io/blog/how-to-dynamically-declare-variables-inside-a-loop-in-python
         dict = {}
@@ -36,45 +39,14 @@ class MapView(View):
                 key = f"{country}_status"
                 status_dict[key] = "not_visited"
 
-            globals().update(status_dict) # https://stackoverflow.com/questions/18090672/convert-dictionary-entries-into-variables
+            # globals().update(status_dict) # https://stackoverflow.com/questions/18090672/convert-dictionary-entries-into-variables
+            dict.update(status_dict)
 
-        globals().update(dict)
+        # globals().update(dict)
+
+        print(dict)
             
-        
-        return render(
-                request,
-                "map/home.html",
-                {
-                    "albania_status": albania_status,
-                    "albania": albania,
-                    "belgium_status": belgium_status,
-                    "belgium": belgium,
-                    "bulgaria_status": bulgaria_status,
-                    "bulgaria": bulgaria,
-                    "bosnia_and_herzegovina_status": bosnia_and_herzegovina_status,
-                    "bosnia_and_herzegovina": bosnia_and_herzegovina,
-                    "belarus_status": belarus_status,
-                    "belarus": belarus,
-                    "switzerland_status": switzerland_status,
-                    "switzerland": switzerland,
-                    "czech_republic_status": czech_republic_status,
-                    "czech_republic": czech_republic,
-                    "germany_status": germany_status,
-                    "germany": germany,
-                    "denmark_status": denmark_status,
-                    "denmark": denmark,
-                    "estonia_status": estonia_status,
-                    "estonia": estonia,
-                    "finland_status": finland_status,
-                    "finland": finland,
-                    "united_kingdom": united_kingdom_status,
-                    "united_kingdom": united_kingdom,
-
-
-
-
-                },
-            )
+        return render(request, "map/home.html", dict)
 
 
 class CountryView(View):
