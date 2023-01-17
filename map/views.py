@@ -12,38 +12,33 @@ from django.views.generic import (
 )
 from .models import Country, Visit
 from .forms import VisitForm
-# from .assign_country import *
 
 
 class MapView(View):
 
     def get(self, request):
 
-        country_list = ["albania", "belgium", "bulgaria", "bosnia_and_herzegovina", "belarus", "switzerland", "czech_republic",
-                        "germany", "denmark", "estonia", "finland", "united_kingdom", "greece", "croatia", "hungary", "ireland",
-                        "iceland", "italy", "lithuania", "luxembourg", "latvia", "moldova", "montenegro", "norway", "poland", "romania",
-                        "serbia", "slovakia", "slovenia", "sweden", "ukraine", "netherlands", "portugal", "spain", "france",
-                        "malta", "canary_islands"]
+        country_code_list = ['AL', 'BY', 'BE', 'BA', 'BG', 'HR', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'HU', 'IS',
+                             'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'MD', 'ME', 'NL', 'NO', 'PL', 'PT', 'RO', 'RS', 'SK',
+                             'SI', 'ES', 'SE', 'CH', 'UA', 'GB']
 
-        # https://plainenglish.io/blog/how-to-dynamically-declare-variables-inside-a-loop-in-python
         dict = {}
-        for country in country_list:
-            key = country
-            dict[key] = Country.objects.get(slug=country)
+        for country_code in country_code_list:
+            key = country_code
+            dict[key] = Country.objects.get(code=country_code)
 
             status_dict = {}
             if dict[key].country_map.filter(user=request.user.id).exists():
-                key = f"{country}_status"
-                status_dict[key] = dict[country].country_map.get(user=request.user.id)
+                key = f"{country_code}_status"
+                status_dict[key] = dict[country_code].country_map.get(user=request.user.id)
             else:
-                key = f"{country}_status"
+                key = f"{country_code}_status"
                 status_dict[key] = "not_visited"
 
             # globals().update(status_dict) # https://stackoverflow.com/questions/18090672/convert-dictionary-entries-into-variables
-            dict.update(status_dict)
+            dict.update(status_dict) # MERGE DICTIONARIES - https://favtutor.com/blogs/merge-dictionaries-python#:~:text=You%20can%20merge%20two%20dictionaries,other%20one%20by%20overwriting%20it.
 
         # globals().update(dict)
-
         print(dict)
             
         return render(request, "map/home.html", dict)

@@ -5,9 +5,14 @@ from django.urls import reverse
 
 
 class Country(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(null=True, default=None, unique=True)
-    about = models.CharField(max_length=500)
+    name = models.CharField(max_length=100, unique=True, default=None)
+    code = models.CharField(max_length=5, unique=True, default=None)
+    capital = models.CharField(max_length=100, unique=True, default=None)
+    region = models.CharField(max_length=100, default=None)
+    currency = models.CharField(max_length=100, default=None)
+    language = models.CharField(max_length=100, default=None)
+    about = models.CharField(max_length=500, default=None)
+    population = models.CharField(max_length=100, default=None)
 
     def __str__(self):
         return self.name
