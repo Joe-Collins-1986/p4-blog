@@ -17,18 +17,9 @@
     select {
         width: 30%;
     }
-    .target {
-      background-color:red;
-      height: 33px;
-      display: flex;
-      align-items: center;
-      margin-bottom: 10px;
-      cursor: pointer;
-    }
-
 
     /* styling of the tooltip display */
-    p#prompt {
+    h3#prompt {
         display: none;
         position: absolute;
         top: 150px;
@@ -36,26 +27,9 @@
 
 </style>
 
-<script>
-    window.onload=function(){
-
-    const targets = document.querySelectorAll('.target');
-
-    targets.forEach(target => {
-    target.addEventListener('click', function handleHover(event) {
-        console.log('target hovered over', event);
-
-        target.setAttribute('style', 'background-color: yellow;');
-    });
-    });
-    
-}
-</script>
-
-<p id="prompt">TESTING</p>
-
-<button class="target" data-el="See if this appears"></button>
-
+<div>
+    <h3 id="prompt">TESTING</h3>
+</div>
 
 <form>
     <select onchange="location = this.value;">
@@ -93,7 +67,7 @@
       stroke-linecap="round"
       stroke-linejoin="round"
       version="1.2"
-      viewbox="800 0 500 857"
+      viewbox="800 0 500 300"
     >
 
     <a class="{{ AL_status }}" href="{% url 'country' AL.id %}">
@@ -154,14 +128,14 @@
     </a>
     <a class="{{ DK_status }}" href="{% url 'country' DK.id %}">
         <path
-            class="Denmark"
             d="M 1046.1 147.7 1043.7 152.6 1038.5 149.1 1037.6 146.6 1044.4 144.6 1046.1 147.7 Z"
+            name="Denmark"
         ></path>
     </a>
     <a class="{{ DK_status }}" href="{% url 'country' DK.id %}">
         <path
-            class="Denmark"
             d="M 1033.3 151.5 1030.4 152.4 1026.7 151.6 1024.6 148.2 1024.2 142.1 1024.8 140.4 1026.1 138.6 1030.1 138.3 1031.7 136.6 1035.3 134.9 1035.3 138 1034.1 140 1034.8 141.6 1037.4 142.5 1036.4 144.8 1035 144.2 1031.9 148.5 1033.3 151.5 Z"
+            name="Denmark"
         ></path>
     </a>
     <a class="{{ EE_status }}" href="{% url 'country' EE.id %}">
@@ -180,26 +154,26 @@
     </a>
     <a class="{{ GB_status }}" href="{% url 'country' GB.id %}">
         <path
-            class="United Kingdom"
             d="M 956.7 158.2 953.2 157 950.2 157.1 951.4 153.8 950.5 150.6 954.5 150.3 959.4 154.1 956.7 158.2 Z"
+            name="United Kingdom"
         ></path>
     </a>
     <a class="{{ GB_status }}" href="{% url 'country' GB.id %}">
         <path
-            class="United Kingdom"
             d="M 972.6 129.5 967.5 136 972.2 135.2 977.3 135.2 976 140.1 971.7 145.5 976.6 145.8 976.9 146.5 981.1 153.6 984.3 154.6 987.2 161.6 988.6 164 994.5 165.1 993.9 169.1 991.5 170.9 993.4 174.1 989 177.3 982.5 177.2 974.1 179 971.9 177.7 968.6 180.6 964.1 179.9 960.5 182.3 958 181.1 965.3 174.6 969.7 173.2 962.1 172.2 960.8 169.7 965.9 167.8 963.4 164.5 964.4 160.5 971.5 161.1 972.3 157.5 969.2 153.8 969.1 153.7 963.4 152.6 962.3 151 964.1 148.3 962.6 146.6 960 149.5 959.9 143.6 957.7 140.6 959.6 134.4 963.4 129.6 967 130 972.6 129.5 Z"
+            name="United Kingdom"
         ></path>
     </a>
     <a class="{{ GR_status }}" href="{% url 'country' GR.id %}">
         <path
-            class="Greece"
             d="M 1112.7 272.6 1115.8 274.8 1119.9 274.4 1123.9 274.8 1123.9 276 1126.7 275.2 1126.2 277.1 1118.6 277.6 1118.5 276.6 1111.9 275.3 1112.7 272.6 Z"
+            name="Greece"
         ></path>
     </a>
     <a class="{{ GR_status }}" href="{% url 'country' GR.id %}">
         <path
-            class="Greece"
             d="M 1121.9 239.9 1118.7 239.7 1116 239.1 1109.8 240.7 1113.8 244.3 1111.3 245.4 1108.4 245.4 1105.3 242.1 1104.4 243.5 1106 247.3 1108.9 250.3 1107 251.7 1110.2 254.6 1113 256.5 1113.4 260.1 1108.4 258.4 1110.2 261.7 1106.9 262.3 1109.4 268 1105.9 268.1 1101.3 265.3 1098.9 260.2 1097.6 255.9 1095.3 253 1092.3 249.3 1091.8 247.5 1094 244.4 1094.1 242.3 1095.8 241.4 1095.7 239.7 1099.1 239.2 1100.9 237.8 1103.7 237.9 1104.5 236.8 1105.5 236.6 1109.3 236.8 1113.3 235 1117.2 237.3 1121.8 236.7 1121.5 233.5 1124.2 235.2 1123.1 239.2 1121.9 239.9 Z"
+            name="Greece"
         ></path>
     </a>
     <a class="{{ HR_status }}" href="{% url 'country' HR.id %}">
@@ -232,20 +206,20 @@
     </a>
     <a class="{{ IT_status }}" href="{% url 'country' IT.id %}">
         <path
-            class="Italy"
             d="M 1068.2 256.4 1066.5 261.5 1067.4 263.4 1066.5 266.7 1062.3 264.3 1059.6 263.6 1052.1 260.4 1052.6 257.1 1058.8 257.7 1064.2 257 1068.2 256.4 Z"
+            name="Italy"
         ></path>
     </a>
     <a class="{{ IT_status }}" href="{% url 'country' IT.id %}">
         <path
-            class="Italy"
             d="M 1034.2 237.4 1037.5 241.9 1037.1 250.4 1034.7 250 1032.6 252.1 1030.6 250.4 1030.1 242.7 1028.8 239.1 1031.7 239.4 1034.2 237.4 Z"
+            name="Italy"
         ></path>
     </a>
     <a class="{{ IT_status }}" href="{% url 'country' IT.id %}">
         <path
-            class="Italy"
             d="M 1055.9 203.9 1055.5 207 1056.9 209.7 1052.8 208.7 1048.9 211 1049.3 214.1 1048.8 215.9 1050.7 219.1 1055.7 222.3 1058.6 227.6 1064.7 232.7 1068.7 232.6 1070.1 234 1068.7 235.3 1073.5 237.6 1077.5 239.5 1082.2 242.9 1082.8 244 1082 246.3 1078.9 243.3 1074.3 242.3 1072.4 246.4 1076.3 248.8 1075.9 252.1 1073.8 252.5 1071.3 258 1069.1 258.5 1069 256.5 1069.9 253.1 1071 251.7 1068.7 248 1066.9 244.8 1064.7 244 1062.9 241.3 1059.5 240.1 1057.1 237.5 1053.3 237.1 1049 234.3 1044.1 230.1 1040.4 226.5 1038.5 220.2 1035.9 219.5 1031.7 217.4 1029.4 218.2 1026.5 221.2 1024.4 221.6 1024.9 218.9 1022.1 218.1 1020.6 213.2 1022.3 211.3 1020.8 208.9 1020.9 207.1 1023.1 208.5 1025.6 208.2 1028.3 206 1029.2 207 1031.6 206.8 1032.6 204.3 1036.4 205.1 1038.5 204 1038.8 201.5 1041.9 202.4 1042.4 201.2 1047.3 200.1 1048.6 202.2 1055.9 203.9 Z"
+            name="Italy"
         ></path>
     </a>
     <a class="{{ LT_status }}" href="{% url 'country' LT.id %}">
@@ -286,26 +260,26 @@
     </a>
     <a class="{{ NO_status }}" href="{% url 'country' NO.id %}">
         <path
-            class="Norway"
             d="M 1113.7 67.5 1107.3 69.6 1104.1 70.1 1104.9 66.3 1099.1 64.2 1093.2 66 1092.1 70 1088.7 72.4 1084 71.1 1078.7 71.3 1073.6 68.5 1071.4 69.9 1068.8 70.1 1068.9 73.7 1060.9 72.8 1060.3 75.9 1056.3 75.9 1054 79.8 1050.6 85.9 1044.9 93.8 1046.7 95.8 1045.4 98 1041.1 97.9 1038.7 103.3 1039.7 111 1042.8 113.9 1042 120.8 1038.6 124.8 1036.8 128.2 1033.5 124.6 1024.9 131.4 1018.8 132.8 1012.3 129.8 1010.5 123.5 1008.5 110 1012.5 106.3 1023.8 101.4 1031.9 95.5 1039.1 87.7 1048 77 1054.4 72.9 1064.7 66.1 1073.2 63.7 1079.9 64 1085.1 59.6 1092.5 59.8 1099.5 58.8 1113.2 62.7 1108.3 64.1 1113.7 67.5 Z"
+            name="Norway"
         ></path>
     </a>
     <a class="{{ NO_status }}" href="{% url 'country' NO.id %}">
         <path
-            class="Norway"
             d="M 1076.6 25.2 1069 27.1 1062.2 26 1064.4 24.8 1061.8 23.3 1069.1 22.4 1071 24.1 1076.6 25.2 Z"
+            name="Norway"
         ></path>
     </a>
     <a class="{{ NO_status }}" href="{% url 'country' NO.id %}">
         <path
-            class="Norway"
             d="M 1051 16.7 1063.6 20.1 1055 21.9 1053.8 25.3 1050.8 26.2 1049.9 30.2 1045.5 30.4 1037 27.5 1040 25.8 1034.3 24.4 1026.6 20.5 1023.4 17 1032.7 15.4 1035 16.9 1040 16.9 1041 15.4 1046.2 15.2 1051 16.7 Z"
+            name="Norway"
         ></path>
     </a>
     <a class="{{ NO_status }}" href="{% url 'country' NO.id %}">
         <path
-            class="Norway"
             d="M 1075.4 13.7 1082.8 15.2 1078.4 17.6 1068.3 18.1 1057.6 17.3 1056.6 16.1 1051.5 16.1 1047.2 14.1 1057.7 12.9 1063.1 13.9 1066.2 12.6 1075.4 13.7 Z"
+            name="Norway"
         ></path>
     </a>
 
@@ -382,26 +356,26 @@
     </a>
     <a class="{{ FR_status }}" href="{% url 'country' FR.id %}">
         <path
-            class="France"
             d="M 1035.7 231.4 1034.2 236.3 1031.8 235 1030.5 230.8 1031.4 228.4 1034.6 226 1035.7 231.4 Z"
+            name="France"
         ></path>
     </a>
     <a class="{{ FR_status }}" href="{% url 'country' FR.id %}">
         <path
-            class="France"
             d="M 1014.4 185 1015.5 185.5 1016.9 185.4 1019.3 187 1026.5 188.2 1024.1 192.4 1023.7 196.9 1022.4 198 1020.1 197.4 1020.3 199 1016.7 202.5 1016.7 205.4 1019.1 204.4 1020.9 207.1 1020.8 208.9 1022.3 211.3 1020.6 213.2 1022.1 218.1 1024.9 218.9 1024.4 221.6 1019.9 225.2 1009.7 223.5 1002.3 225.6 1001.7 229.4 995.8 230.2 990 227.3 988.1 228.7 978.6 225.8 976.6 223.4 979.3 219.6 980.3 207 975.2 200.4 971.5 197.2 963.9 194.8 963.5 190.2 970 188.9 978.3 190.5 976.8 183.4 981.5 186.1 992.9 181.3 994.4 176.2 998.6 174.9 999.4 177.1 1001.6 177.2 1004 179.7 1007.5 182.6 1010 182.1 1014.4 185 Z"
+            name="France"
         ></path>
     </a>
     <a class="{{ MT_status }}" href="{% url 'country' MT.id %}">
         <path
-            class="Malta"
             d="M 1063.9 271.7 1063.7 272 1063.2 271.8 1062.7 271.5 1062.7 271 1062.6 270.9 1063.2 270.9 1063.6 271.2 1063.8 271.4 1063.9 271.7 Z"
+            name="Malta"
         ></path>
     </a>
     <a class="{{ MT_status }}" href="{% url 'country' MT.id %}">
         <path
-            class="Malta"
             d="M 1062.3 270.6 1061.8 270.5 1061.8 270.3 1062.2 270.2 1062.6 270.5 1062.3 270.6 Z"
+            name="Malta"
         ></path>
     </a>
     <circle cx="997.9" cy="189.1" id="0"></circle>
@@ -432,5 +406,24 @@
 {% for country in countries %}
     <a href="{% url 'country' country.id %}"><p>{{ country.name }}</p></a>
 {% endfor %}
+
+
+<script>
+    window.onload=function(){
+
+        var targets = document.querySelectorAll('path');
+        var prompt = document.getElementById('prompt')
+
+        targets.forEach(element => element.addEventListener('mouseover', event => {
+        countryHovered = (event.target.getAttribute("name"));
+        prompt.setAttribute('style', 'display: block;');
+        prompt.innerHTML = countryHovered;
+        }));
+
+        targets.forEach(element => element.addEventListener('mouseleave', event => {
+        prompt.setAttribute('style', 'display: none;');
+        }));
+    }
+</script>
 
 {% endblock content %}
