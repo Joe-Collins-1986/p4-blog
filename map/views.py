@@ -39,9 +39,14 @@ class MapView(View):
             dict.update(status_dict) # MERGE DICTIONARIES - https://favtutor.com/blogs/merge-dictionaries-python#:~:text=You%20can%20merge%20two%20dictionaries,other%20one%20by%20overwriting%20it.
 
         # globals().update(dict)
+        countries = Country.objects.all()
+        visited_countries = Visit.objects.filter(user=request.user.id)
+
+        dict['countries'] = countries
+        dict['visited_countries'] = visited_countries
             
         return render(request, "map/home.html", dict)
-
+    
 
 class CountryView(View):
 

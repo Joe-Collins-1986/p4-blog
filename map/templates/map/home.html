@@ -4,8 +4,6 @@
 <h1>European Map</h1>
 <br><br>
 
-<button onclick="myFunction()">Click me!</button>
-
 <style>
     .visited {
       fill: rgb(212, 255, 0)
@@ -21,14 +19,51 @@
     /* styling of the tooltip display */
     p#prompt {
         display: none;
+        position: absolute;
+        top: 150px;
     }
 
 </style>
 
-    
-<p id="prompt">TESTING</p>
+<hr>
+<h2>Visited</h2>
+<form>
+    <select onchange="location = this.value;">
+        <option value="">Select country</option>
+        {% for visit in visited_countries %}
+            {% if visit.status == "visited" %}
+            <option value="{% url 'country' visit.country.id %}">{{ visit.country.name }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+</form>
 
-<button id="target">TEST-PROMPT</button>
+<hr>
+<h2>Wish List</h2>
+<form>
+    <select onchange="location = this.value;">
+        <option value="">Select country</option>
+        {% for visit in visited_countries %}
+            {% if visit.status == "wish_list" %}
+            <option value="{% url 'country' visit.country.id %}">{{ visit.country.name }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+</form>
+
+<hr>
+<h2>All Countries</h2>
+<form>
+    <select onchange="location = this.value;">
+        <option value="">Select country</option>
+        {% for country in countries %}
+        <option value="{% url 'country' country.id %}">{{ country.name }}</option>
+        {% endfor %}
+    </select>
+</form>
+
+   
+<p id="prompt">TESTING</p>
 
 <div>
     <svg
@@ -40,7 +75,7 @@
       viewbox="800 0 500 857"
     >
 
-    <a class="{{ AL_status }}" href="{% url 'country' AL.id %}">
+    <a class="{{ AL_status }}" id="target" href="{% url 'country' AL.id %}">
         <path
             d="M1088 228l0.4 1.2 1.4-0.6 1.2 1.7 1.3 0.7 0.6 2.3-0.5 2.2 1 2.7 2.3 1.5 0.1 1.7-1.7 0.9-0.1 2.1-2.2 3.1-0.9-0.4-0.2-1.4-3.1-2.2-0.7-3 0.1-4.4 0.5-1.9-0.9-1-0.5-2.1 1.9-3.1z"
             id="AL"
@@ -354,5 +389,27 @@
   </svg>
 
 </div>
+
+<hr>
+<h2>Visited</h2>
+{% for visit in visited_countries %}
+    {% if visit.status == "visited" %}
+        <a href="{% url 'country' visit.country.id %}"><p>{{ visit.country.name }}</p></a>
+    {% endif %}
+{% endfor %}
+
+<hr>
+<h2>Wish List</h2>
+{% for visit in visited_countries %}
+    {% if visit.status == "wish_list" %}
+        <a href="{% url 'country' visit.country.id %}"><p>{{ visit.country.name }}</p></a>
+    {% endif %}
+{% endfor %}
+
+<hr>
+<h2>All Countries</h2>
+{% for country in countries %}
+    <a href="{% url 'country' country.id %}"><p>{{ country.name }}</p></a>
+{% endfor %}
 
 {% endblock content %}
