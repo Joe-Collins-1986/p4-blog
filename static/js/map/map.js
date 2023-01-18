@@ -4,17 +4,17 @@
 window.onload=function(){
 
     // selecting the elements for which we want to add a tooltip
-    const target = document.getElementById("TEST");
-    // const tooltip = document.getElementById("tooltip-text");
+    const target = document.getElementById("target");
+    const prompt = document.getElementById("prompt");
     
     // change display to 'block' on mouseover
     target.addEventListener('mouseover', () => {
-      tooltip.style.display = 'block';
+      prompt.style.display = 'block';
     }, false);
     
     // change display to 'none' on mouseleave
     target.addEventListener('mouseleave', () => {
-      tooltip.style.display = 'none';
+      prompt.style.display = 'none';
     }, false);
     
     }

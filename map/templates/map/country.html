@@ -4,6 +4,10 @@
 
 <h1>Country {{ country.name }}</h1>
 <p>Country {{ country.about }}</p>
+<p>Capital: {{ country.capital }}</p>
+<p>Currency: {{ country.currency }}</p>
+<p>Language: {{ country.language }}</p>
+<p>Population: {{ country.population }}</p>
 
 <form method="POST">
     {% csrf_token %}
