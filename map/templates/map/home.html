@@ -36,6 +36,22 @@
 
 </style>
 
+<script>
+    window.onload=function(){
+
+    const targets = document.querySelectorAll('.target');
+
+    targets.forEach(target => {
+    target.addEventListener('click', function handleHover(event) {
+        console.log('target hovered over', event);
+
+        target.setAttribute('style', 'background-color: yellow;');
+    });
+    });
+    
+}
+</script>
+
 <p id="prompt">TESTING</p>
 
 <button class="target" data-el="See if this appears"></button>
