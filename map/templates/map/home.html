@@ -14,6 +14,9 @@
     .wish_list {
       fill: rgb(43, 255, 0)
     }
+    select {
+        width: 30%;
+    }
 
 
     /* styling of the tooltip display */
@@ -25,11 +28,10 @@
 
 </style>
 
-<hr>
-<h2>Visited</h2>
+
 <form>
     <select onchange="location = this.value;">
-        <option value="">Select country</option>
+        <option value="">Visited</option>
         {% for visit in visited_countries %}
             {% if visit.status == "visited" %}
             <option value="{% url 'country' visit.country.id %}">{{ visit.country.name }}</option>
@@ -37,12 +39,9 @@
         {% endfor %}
     </select>
 </form>
-
-<hr>
-<h2>Wish List</h2>
 <form>
     <select onchange="location = this.value;">
-        <option value="">Select country</option>
+        <option value="">Wish List</option>
         {% for visit in visited_countries %}
             {% if visit.status == "wish_list" %}
             <option value="{% url 'country' visit.country.id %}">{{ visit.country.name }}</option>
@@ -50,12 +49,9 @@
         {% endfor %}
     </select>
 </form>
-
-<hr>
-<h2>All Countries</h2>
 <form>
     <select onchange="location = this.value;">
-        <option value="">Select country</option>
+        <option value="">All Countries</option>
         {% for country in countries %}
         <option value="{% url 'country' country.id %}">{{ country.name }}</option>
         {% endfor %}
