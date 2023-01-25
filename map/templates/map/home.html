@@ -1,6 +1,8 @@
 {% extends "blog/base.html" %}
 {% block content %}
 
+{% if user.is_authenticated %}
+
 <h1>European Map</h1>
 <br><br>
 
@@ -425,5 +427,7 @@
         }));
     }
 </script>
+
+{% endif %}
 
 {% endblock content %}
