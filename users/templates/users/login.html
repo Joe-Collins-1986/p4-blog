@@ -1,10 +1,18 @@
 {% extends "blog/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
+
+    <style>
+        .form-container {
+            border: solid 3px red;
+            border-radius: 10px;
+        }
+    </style>
+    
+    <div class="form-container">
         <form method="POST">
             {% csrf_token %}
-            <fieldset class="form-group">
+            <fieldset class="form-group w-50 p-3" style="background-color: rgb(76, 114, 194);">
                 <legend class="border-bottom mb-4">Login</legend>
                 {{ form|crispy }}
             </fieldset>
